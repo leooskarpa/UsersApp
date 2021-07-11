@@ -4,13 +4,6 @@ import { createStore, combineReducers } from 'redux';
 // Actions
 ///////////////////////////
 
-export const addUser = (user) => {
-    return {
-        type: 'addUser',
-        payload: user
-    }
-}
-
 export const removeUser = (user) => {
     return {
         type: 'removeUser',
@@ -31,8 +24,6 @@ export const loadUsers = (users) => {
 
 export const reducer = (state = [], action) => {
     switch (action.type) {
-        case 'addUser':
-            return [...state, action.payload]
         case 'removeUser':
             return state.filter(user => user._id !== action.payload._id)
         case 'loadUsers':

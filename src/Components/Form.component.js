@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../store.js';
+import { loadUsers } from '../store.js';
 
 const Form = () => {
 
@@ -22,7 +22,11 @@ const Form = () => {
         e.target.elements.email.value = "";
 
         axios.post('http://localhost:5000/api/add', newUser)
-            .then(() => dispatch(addUser(newUser)))
+            .then(() => {
+                axios.get('http://localhost:5000/api')
+                    .then((res) => dispatch(loadUsers(res.data)))
+                    .catch(err => console.log(err))
+            })
             .catch(err => console.log(err))
     }
 
